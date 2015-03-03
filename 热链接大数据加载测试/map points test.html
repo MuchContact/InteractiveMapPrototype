@@ -1,0 +1,51 @@
+
+<!DOCTYPE html> 
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>jQuery maphilight documentation</title>
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.maphilight.js"></script>
+    <script type="text/javascript">
+	$(function() {
+    });
+	function addPointsOnMap(){
+		var areaTags = generateAreaTags(500);
+		$('#simple').append(areaTags);
+		$('#map').attr("usemap", "#simple");
+		$('#map').maphilight();
+	}
+	function generateAreaTags(size){
+		var result='';
+		for(var i=0;i<size;i++){
+			var center = generateRandomCenter(420,300);
+			result+="<area href=\"#\" shape=\"circle\" coords=\""+center+",4\" alt=\"Octoface\" data-maphilight='{\"stroke\":false,\"fillColor\":\"ff0000\",\"fillOpacity\":0.6,\"alwaysOn\":true}' title=\"test\">";
+		}
+		return result;
+	}
+	function generateRandomCenter(width, height){
+		var x = GetRandomNum(0, width);
+		var y = GetRandomNum(0, height);
+		return x+','+y;
+	}
+	function GetRandomNum(Min,Max)
+	{   
+		var Range = Max - Min;   
+		var Rand = Math.random();   
+		return(Min + Math.round(Rand * Range));   
+	}   
+	</script>
+</head>
+<body>
+<h1>A small map</h1>
+<p>This is just a simple example of how the maps look.</p>
+<p>
+<img src="background.png" width="420" height="300" class="map" id="map">
+<map name="simple" id="simple">
+
+</map>
+</p>
+<p>Because it's a really common question: <input type="button" value="添加500个点" onclick="addPointsOnMap()"/><br/></p>
+<a href="./">Back to the index</a>
+</body>
+</html>

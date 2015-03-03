@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<!-- saved from url=(0079)http://samples.msdn.microsoft.com/workshop/samples/graphicsInHTML5/svgchart.htm -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=9">
+        <style type="text/css" media="screen">
+            .sser {font-weight:normal; font-family:sans-serif; text-decoration:none;}
+        </style>
+        <script type="text/javascript">
+              var tthidden = true;
+            var arrowWidth = 14, arrowHeight = 14, tipWidth = 94, tipHeight = 34;
+            var pointerOffsetX = 5, pointerOffsetY = 5;
+            var maxX = 460 - arrowWidth - tipWidth - 5;
+            var minX = tipWidth + arrowWidth;
+            var maxY = 365 - tipHeight - arrowHeight - 5;
+            var minY = arrowHeight + tipHeight;
+            function changeText(evt, tooltipText)
+            {
+	            var arrowDir = 'L', tipPosX, tipPosY;
+	            var pts, tipshOffset;
+
+	            var XPos = evt.clientX;
+	            var YPos = evt.clientY;
+    	
+	            if (XPos > maxX) arrowDir = 'R';
+	            else if (XPos < minX) arrowDir = 'L';
+	            if (YPos > maxY) arrowDir = 'D';
+	            if (YPos < minY) arrowDir = 'U';
+    	
+	            if (arrowDir == 'L')
+	            {
+		            XPos += pointerOffsetX;
+		            YPos += pointerOffsetY;
+		            tipPosX = XPos+arrowWidth;
+		            tipPosY = (YPos-(arrowHeight/2))-7;
+		            pts = XPos + "," + YPos;
+		            pts += " " + (XPos+arrowWidth) + "," + (YPos-(arrowHeight/2));
+		            pts += " " + (XPos+arrowWidth) + "," + (YPos+(arrowHeight/2));
+		            tipshOffset = 0;
+	            }
+	            else if (arrowDir == 'R')
+	            {
+		            XPos -= pointerOffsetX;
+		            YPos -= pointerOffsetY;
+		            tipPosX = XPos-arrowWidth-tipWidth+3;
+		            tipPosY = (YPos-(arrowHeight/2))-7;
+		            pts = XPos + "," + YPos;
+		            pts += " " + (XPos-arrowWidth) + "," + (YPos-(arrowHeight/2));
+		            pts += " " + (XPos-arrowWidth) + "," + (YPos+(arrowHeight/2));
+		            tipshOffset = -4;
+	            }
+	            else if (arrowDir == 'U')
+	            {
+		            XPos += pointerOffsetX;
+		            tipPosX = XPos-(tipWidth/2);
+		            tipPosY = (YPos+arrowHeight);
+		            pts = XPos + "," + YPos;
+		            pts += " " + (XPos-(arrowWidth/2)) + "," + (YPos+arrowHeight);
+		            pts += " " + (XPos+(arrowWidth/2)) + "," + (YPos+arrowHeight);
+		            tipshOffset = 0;
+	            }
+	            else if (arrowDir == 'D')
+	            {
+		            XPos -= pointerOffsetX;
+		            tipPosX = XPos-(tipWidth/2);
+		            tipPosY = (YPos-arrowHeight-tipHeight+3);
+		            pts = XPos + "," + YPos;
+		            pts += " " + (XPos-(arrowWidth/2)) + "," + (YPos-arrowHeight);
+		            pts += " " + (XPos+(arrowWidth/2)) + "," + (YPos-arrowHeight);
+		            tipshOffset = 0;
+	            }
+
+	            var tip = document.getElementById("tip");
+	            var tipsh = document.getElementById("tipsh");
+	            var tiptxt = document.getElementById("tiptxt");
+	            var arrow = document.getElementById("arrow");
+      
+	            tip.setAttribute("x",tipPosX);
+	            tip.setAttribute("y",tipPosY);
+        
+	            tipsh.setAttribute("x",tipPosX+tipshOffset);
+	            tipsh.setAttribute("y",tipPosY);
+       
+	            tiptxt.setAttribute("x",tipPosX+20);
+	            tiptxt.setAttribute("y",tipPosY+20);
+    	
+	            var tipText = document.createTextNode(tooltipText);
+	            tiptxt.replaceChild(tipText,tiptxt.firstChild);
+        
+                arrow.setAttribute("points",pts);
+
+                if (tthidden)
+	            {
+		            tip.setAttribute("visibility","visible");
+		            tipsh.setAttribute("visibility","visible");
+		            tiptxt.setAttribute("visibility","visible");
+		            arrow.setAttribute("visibility","visible");
+		            tthidden = false;
+	            }
+            }
+            function changeTextNotOver(evt)
+            {
+	            var targetshape = evt.target;
+	            targetshape.setAttribute("style","fill:url(#blue);stroke:#035E8D;stroke-width:2;");
+            }
+            function changeColor(evt)
+            {
+	            var targetshape = evt.target;
+	            targetshape.setAttribute("style","fill:url(#hover);stroke:#ff0000;stroke-width:2;cursor:pointer");
+            }
+
+        </script>
+    <style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+    <body>
+       
+      <svg version="1.1" id="Layer_1" xmlns="&amp;ns_svg;" xmlns:xlink="&amp;ns_xlink;" width="460" height="365" xml:space="preserve">
+        <defs>
+
+        <filter id="Gaussian_Blur">
+        <fegaussianblur in="SourceGraphic" stdDeviation="3"></fegaussianblur>
+        </filter>
+        </defs>
+
+        <lineargradient id="hover" x1="0%" y1="0%" x2="100%" y2="0%">
+	        <stop offset="0%" style="stop-color:#ff9966;stop-opacity:1"></stop>
+	        <stop offset="100%" style="stop-color:#ed5600;stop-opacity:1"></stop>
+        </lineargradient>
+        <lineargradient id="blue" x1="0%" y1="0%" x2="100%" y2="0%">
+	        <stop offset="0%" style="stop-color:#33ccff;stop-opacity:1"></stop>
+	        <stop offset="100%" style="stop-color:#006699;stop-opacity:1"></stop>
+        </lineargradient>
+        <lineargradient id="inverseblue" x1="0%" y1="0%" x2="0%" y2="100%">
+	        <stop offset="0%" style="stop-color:#006699;stop-opacity:.8"></stop>
+	        <stop offset="100%" style="stop-color:#ffffff;stop-opacity:.6"></stop>
+
+        </lineargradient>
+        <lineargradient id="gris" x1="0%" y1="0%" x2="0%" y2="100%">
+	        <stop offset="0%" style="stop-color:#9da09e;stop-opacity:.4"></stop>
+	        <stop offset="49%" style="stop-color:#676967;stop-opacity:.4"></stop>
+	        <stop offset="50%" style="stop-color:#515151;stop-opacity:.4"></stop>
+	        <stop offset="100%" style="stop-color:#000000;stop-opacity:.4"></stop>
+        </lineargradient>
+
+        <text x="10" y="18" font-size="12" font-family="Arial">{Page}.svg</text>
+        <rect x="115" y="20" width="170" height="8" style="fill:url(#inverseblue);filter:url(#Gaussian_Blur);" rx="12" ry="12"></rect>
+        <rect x="115" y="3" width="170" height="17" style="fill:url(#blue);stroke:#035E8D;stroke-width:2;" rx="12" ry="12" onmouseover="changeColor(evt)" onmousemove="changeText(evt,&#39;5 milliseconds&#39;)" onmouseout="changeTextNotOver(evt)"></rect>
+        <text x="251" y="15" font-size="11" font-family="Arial" fill="#ffffff">15.2%</text>
+        <line x1="3" x2="460" y1="29" y2="29" style="stroke:#cccccc;stroke-width:1"></line>
+
+        <text x="10" y="48" font-size="12" font-family="Arial">{Page}.svg</text>
+        <rect x="115" y="50" width="86" height="8" style="fill:url(#inverseblue);filter:url(#Gaussian_Blur);" rx="12" ry="12"></rect>
+        <rect x="115" y="33" width="86" height="17" style="fill:url(#blue);stroke:#035E8D;stroke-width:2;" rx="12" ry="12" onmouseover="changeColor(evt)" onmousemove="changeText(evt,&#39;2 milliseconds&#39;)" onmouseout="changeTextNotOver(evt)"></rect>
+        <text x="171" y="45" font-size="11" font-family="Arial" fill="#ffffff">6.1%</text>
+        <line x1="3" x2="460" y1="59" y2="59" style="stroke:#cccccc;stroke-width:1"></line>
+
+        <text x="10" y="78" font-size="12" font-family="Arial">{Page}.svg</text>
+        <rect x="115" y="80" width="340" height="8" style="fill:url(#inverseblue);filter:url(#Gaussian_Blur);" rx="12" ry="12"></rect>
+        <rect x="115" y="63" width="340" height="17" style="fill:url(#blue);stroke:#035E8D;stroke-width:2;" rx="12" ry="12" onmouseover="changeColor(evt)" onmousemove="changeText(evt,&#39;11 milliseconds&#39;)" onmouseout="changeTextNotOver(evt)"></rect>
+        <text x="421" y="75" font-size="11" font-family="Arial" fill="#ffffff">33.3%</text>
+        <line x1="3" x2="460" y1="89" y2="89" style="stroke:#cccccc;stroke-width:1"></line>
+
+        <text x="10" y="108" font-size="12" font-family="Arial">{Page}.svg</text>
+        <rect x="115" y="110" width="58" height="8" style="fill:url(#inverseblue);filter:url(#Gaussian_Blur);" rx="12" ry="12"></rect>
+        <rect x="115" y="93" width="58" height="17" style="fill:url(#blue);stroke:#035E8D;stroke-width:2;" rx="12" ry="12" onmouseover="changeColor(evt)" onmousemove="changeText(evt,&#39;1 milliseconds&#39;)" onmouseout="changeTextNotOver(evt)"></rect>
+        <text x="143" y="105" font-size="11" font-family="Arial" fill="#ffffff">3.0%</text>
+        <line x1="3" x2="460" y1="119" y2="119" style="stroke:#cccccc;stroke-width:1"></line>
+
+        <text x="10" y="138" font-size="12" font-family="Arial">{Page}.svg</text>
+        <rect x="115" y="140" width="58" height="8" style="fill:url(#inverseblue);filter:url(#Gaussian_Blur);" rx="12" ry="12"></rect>
+        <rect x="115" y="123" width="58" height="17" style="fill:url(#blue);stroke:#035E8D;stroke-width:2;" rx="12" ry="12" onmouseover="changeColor(evt)" onmousemove="changeText(evt,&#39;1 milliseconds&#39;)" onmouseout="changeTextNotOver(evt)"></rect>
+        <text x="143" y="135" font-size="11" font-family="Arial" fill="#ffffff">3.0%</text>
+        <line x1="3" x2="460" y1="149" y2="149" style="stroke:#cccccc;stroke-width:1"></line>
+
+        <text x="10" y="168" font-size="12" font-family="Arial">{Page}.svg</text>
+        <rect x="115" y="170" width="86" height="8" style="fill:url(#inverseblue);filter:url(#Gaussian_Blur);" rx="12" ry="12"></rect>
+        <rect x="115" y="153" width="86" height="17" style="fill:url(#blue);stroke:#035E8D;stroke-width:2;" rx="12" ry="12" onmouseover="changeColor(evt)" onmousemove="changeText(evt,&#39;2 milliseconds&#39;)" onmouseout="changeTextNotOver(evt)"></rect>
+        <text x="171" y="165" font-size="11" font-family="Arial" fill="#ffffff">6.1%</text>
+        <line x1="3" x2="460" y1="179" y2="179" style="stroke:#cccccc;stroke-width:1"></line>
+
+        <text x="10" y="198" font-size="12" font-family="Arial">{Page}.svg</text>
+        <rect x="115" y="200" width="58" height="8" style="fill:url(#inverseblue);filter:url(#Gaussian_Blur);" rx="12" ry="12"></rect>
+        <rect x="115" y="183" width="58" height="17" style="fill:url(#blue);stroke:#035E8D;stroke-width:2;" rx="12" ry="12" onmouseover="changeColor(evt)" onmousemove="changeText(evt,&#39;1 milliseconds&#39;)" onmouseout="changeTextNotOver(evt)"></rect>
+        <text x="143" y="195" font-size="11" font-family="Arial" fill="#ffffff">3.0%</text>
+        <line x1="3" x2="460" y1="209" y2="209" style="stroke:#cccccc;stroke-width:1"></line>
+
+        <text x="10" y="228" font-size="12" font-family="Arial">{Page}.svg</text>
+        <rect x="115" y="230" width="86" height="8" style="fill:url(#inverseblue);filter:url(#Gaussian_Blur);" rx="12" ry="12"></rect>
+        <rect x="115" y="213" width="86" height="17" style="fill:url(#blue);stroke:#035E8D;stroke-width:2;" rx="12" ry="12" onmouseover="changeColor(evt)" onmousemove="changeText(evt,&#39;2 milliseconds&#39;)" onmouseout="changeTextNotOver(evt)"></rect>
+        <text x="171" y="225" font-size="11" font-family="Arial" fill="#ffffff">6.1%</text>
+        <line x1="3" x2="460" y1="239" y2="239" style="stroke:#cccccc;stroke-width:1"></line>
+
+        <text x="10" y="258" font-size="12" font-family="Arial">{Page}.svg</text>
+        <rect x="115" y="260" width="114" height="8" style="fill:url(#inverseblue);filter:url(#Gaussian_Blur);" rx="12" ry="12"></rect>
+        <rect x="115" y="243" width="114" height="17" style="fill:url(#blue);stroke:#035E8D;stroke-width:2;" rx="12" ry="12" onmouseover="changeColor(evt)" onmousemove="changeText(evt,&#39;3 milliseconds&#39;)" onmouseout="changeTextNotOver(evt)"></rect>
+        <text x="199" y="255" font-size="11" font-family="Arial" fill="#ffffff">9.1%</text>
+        <line x1="3" x2="460" y1="269" y2="269" style="stroke:#cccccc;stroke-width:1"></line>
+
+        <text x="10" y="288" font-size="12" font-family="Arial">{Page}.svg</text>
+        <rect x="115" y="290" width="58" height="8" style="fill:url(#inverseblue);filter:url(#Gaussian_Blur);" rx="12" ry="12"></rect>
+        <rect x="115" y="273" width="58" height="17" style="fill:url(#blue);stroke:#035E8D;stroke-width:2;" rx="12" ry="12" onmouseover="changeColor(evt)" onmousemove="changeText(evt,&#39;1 milliseconds&#39;)" onmouseout="changeTextNotOver(evt)"></rect>
+        <text x="143" y="285" font-size="11" font-family="Arial" fill="#ffffff">3.0%</text>
+        <line x1="3" x2="460" y1="299" y2="299" style="stroke:#cccccc;stroke-width:1"></line>
+
+        <text x="10" y="318" font-size="12" font-family="Arial">{Page}.svg</text>
+        <rect x="115" y="320" width="86" height="8" style="fill:url(#inverseblue);filter:url(#Gaussian_Blur);" rx="12" ry="12"></rect>
+        <rect x="115" y="303" width="86" height="17" style="fill:url(#blue);stroke:#035E8D;stroke-width:2;" rx="12" ry="12" onmouseover="changeColor(evt)" onmousemove="changeText(evt,&#39;2 milliseconds&#39;)" onmouseout="changeTextNotOver(evt)"></rect>
+        <text x="171" y="315" font-size="11" font-family="Arial" fill="#ffffff">6.1%</text>
+        <line x1="3" x2="460" y1="329" y2="329" style="stroke:#cccccc;stroke-width:1"></line>
+
+        <text x="10" y="348" font-size="12" font-family="Arial">{Page}.svg</text>
+        <rect x="115" y="350" width="86" height="8" style="fill:url(#inverseblue);filter:url(#Gaussian_Blur);" rx="12" ry="12"></rect>
+        <rect x="115" y="333" width="86" height="17" style="fill:url(#blue);stroke:#035E8D;stroke-width:2;" rx="12" ry="12" onmouseover="changeColor(evt)" onmousemove="changeText(evt,&#39;2 milliseconds&#39;)" onmouseout="changeTextNotOver(evt)"></rect>
+        <text x="171" y="345" font-size="11" font-family="Arial" fill="#ffffff">6.1%</text>
+        <line x1="3" x2="460" y1="359" y2="359" style="stroke:#cccccc;stroke-width:1"></line>
+
+        <rect id="tipsh" x="213" y="245" style="fill:#000000;filter:url(#Gaussian_Blur);opacity:0.7;" width="194" height="34" rx="5" ry="5" visibility="visible"></rect>
+        <rect id="tip" x="213" y="245" style="fill:url(#gris);stroke:#ffffff;stroke-width:3;" width="190" height="30" rx="5" ry="5" visibility="visible"></rect>
+        <text id="tiptxt" x="233" y="265" font-size="12" font-family="Arial" fill="#ffffff" visibility="visible">3 milliseconds</text>
+        <polygon id="arrow" points="199,259 213,252 213,266" style="fill:#ffffff" visibility="visible"></polygon>
+        </svg>
+
+
+
+    
+
+</body></html>
