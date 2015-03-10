@@ -1,0 +1,85 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Tile Strategy for features in OpenLayers</title>
+    <!--link rel="stylesheet" href="http://openlayers.org/dev/theme/default/style.css" type="text/css" /-->
+    <!--link rel="stylesheet" href="style.css" type="text/css" /-->
+    <link rel="stylesheet" href="./theme/default/style.css" type="text/css" />
+	<style type="text/css"> 
+		#map {
+            width: 600px;
+            height: 400px;
+            border: 1px solid #ccc;
+        }
+    </style> 
+    <script src="OpenLayers.js"></script>
+	<script src="Strategy_TFS.js"></script>
+	<script src="Protocol_TFS.js"></script>
+    <script type="text/javascript">
+        var map = null;
+        var myNetwork =null;
+		var trace;
+
+        function init(){			
+
+            map = new OpenLayers.Map('map' , { 
+						resolutions: [0.703125, 0.3515625, 0.17578125, 0.087890625, 
+                                        0.0439453125, 0.02197265625, 0.010986328125, 
+                                        0.0054931640625, 0.00274658203125, 0.001373291015625, 
+                                        0.0006866455078125, 0.00034332275390625, 0.000171661376953125, 
+                                        0.0000858306884765625, 0.00004291534423828125, 0.000021457672119140625]
+						});
+			//var ol_osm = new OpenLayers.Layer.OSM("Simple OSM Map");
+			tcLayer = new OpenLayers.Layer.TileCache("TileCache Layer",
+                ["http://c0.tilecache.osgeo.org/wms-c/cache/",
+                 "http://c1.tilecache.osgeo.org/wms-c/cache/",
+                 "http://c2.tilecache.osgeo.org/wms-c/cache/",
+                 "http://c3.tilecache.osgeo.org/wms-c/cache/",
+                 "http://c4.tilecache.osgeo.org/wms-c/cache/"],
+                "basic");
+			map.addLayers([tcLayer]);
+			map.setCenter(new OpenLayers.LonLat(-99.462890625,43.048828125),4);			
+			//vector layer
+			var strTFS = new OpenLayers.Strategy.TFS({resFactor: 1,ratio:1,format: new OpenLayers.Format.GeoJSON()});
+		    var prtTFS = new OpenLayers.Protocol.TFS({ url: "./php/TFS.php",last:false,
+								format: new OpenLayers.Format.GeoJSON()  });
+
+			var layer = new OpenLayers.Layer.Vector("Line",{
+						        strategies: [strTFS],
+						         protocol:prtTFS,
+					 			projection: new OpenLayers.Projection("EPSG:4326"),
+							});
+			map.addLayer(layer);
+			
+			// add edit panel
+			//var editPanel = new OpenLayers.Control.EditingToolbar(layer);
+			//map.addControl(editPanel);
+			
+
+			
+        };
+
+		function allowTrace(allow){
+			if (allow) {
+				trace.activate();	
+			} else {
+				trace.deactivate();
+			}
+		};
+        
+
+    </script>
+  </head>
+ <body onload="init()">
+    <h3 id="title">Tile Strategy for features (TFS) in OpenLayers</h3>    
+    <p>
+        TFS strategy request features tile wise. For current bounding box, it calculates the tiles that intersects with the bounding box. Before requesting to server it checks for already requested tiles or not. The strategy requests from server only tiles that are not already fetched. This strategy helps a lot in caching the features on web and that is very much required for heavy loads web sites. Please check the code  <a target="_blank" href="../src/Strategy_TFS.js">Strategy_TFS.js</a>. There is small change in the protocal as well as, check here <a target="_blank" href="../src/Protocol_TFS.js">Protocol_TFS.js</a>. 
+	
+    <table><tr>
+    <td><div id="map" class="smallmap"></div></td>
+    <td><div align="left">
+
+	</div></td>
+    </tr></table>     
+  </body>
+</html>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <Document>
+        <name>2012 Earthquakes, Magnitude 5</name>
+        <atom:author>
+            <atom:name>U.S. Geological Survey</atom:name>
+        </atom:author>
+        <atom:link href="http://earthquake.usgs.gov"/>
+        <Folder>
+            <name>Magnitude 5</name>
+            <Placemark id="2012 Dec 21 08:07:20.27 UTC">
+                <name>M 5 - 2012 Dec 21, NEAR EAST COAST OF HONSHU, JAPAN</name>
+                <magnitude>5</magnitude>
+                <Point>
+                    <coordinates>141.71,38.633,0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="2012 Dec 21 14:43:39.42 UTC">
+                <name>M 5 - 2012 Dec 21, IZU ISLANDS, JAPAN REGION</name>
+                <magnitude>5</magnitude>
+                <Point>
+                    <coordinates>142.212,29.779,0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="2012 Dec 24 23:24:50.06 UTC">
+                <name>M 5 - 2012 Dec 24, WEST OF MACQUARIE ISLAND</name>
+                <magnitude>5</magnitude>
+                <Point>
+                    <coordinates>146.898,-55.683,0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="2012 Dec 25 17:36:32.80 UTC">
+                <name>M 5 - 2012 Dec 25, PAKISTAN</name>
+                <magnitude>5</magnitude>
+                <Point>
+                    <coordinates>66.465,28.464,0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="2012 Dec 26 02:06:37.12 UTC">
+                <name>M 5 - 2012 Dec 26, TAIWAN REGION</name>
+                <magnitude>5</magnitude>
+                <Point>
+                    <coordinates>122.55,24.043,0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="2012 Dec 26 02:58:23.23 UTC">
+                <name>M 5 - 2012 Dec 26, FIJI REGION</name>
+                <magnitude>5</magnitude>
+                <Point>
+                    <coordinates>-178.619,-20.69,0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="2012 Dec 29 07:19:35.32 UTC">
+                <name>M 5 - 2012 Dec 29, NEAR EAST COAST OF HONSHU, JAPAN</name>
+                <magnitude>5</magnitude>
+                <Point>
+                    <coordinates>141.025,37.064,0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="2012 Dec 29 07:56:00.31 UTC">
+                <name>M 5 - 2012 Dec 29, BISMARCK SEA</name>
+                <magnitude>5</magnitude>
+                <Point>
+                    <coordinates>148.752,-3.371,0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="2012 Dec 30 07:56:52.07 UTC">
+                <name>M 5 - 2012 Dec 30, SUNDA STRAIT, INDONESIA</name>
+                <magnitude>5</magnitude>
+                <Point>
+                    <coordinates>105.283,-6.96,0</coordinates>
+                </Point>
+            </Placemark>
+        </Folder>
+    </Document>
+</kml>
